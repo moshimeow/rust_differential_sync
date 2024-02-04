@@ -2,7 +2,16 @@ use eframe::egui;
 use futures_util::{SinkExt, StreamExt};
 use std::net::SocketAddr;
 use tokio::net::{TcpListener, TcpStream};
+use tokio::sync::mpsc;
+
 use tokio_tungstenite::tungstenite::protocol::Message;
+
+// using tokio::sync::mpsc;
+
+
+struct TextBoxMessage {
+    text: String
+}
 
 struct MyApp {
     text: String,
@@ -88,6 +97,9 @@ async fn main() {
     }
 
     let is_server = args[1] == "server";
+
+    let (tx, mut rx) = tokio::sync::mpsc::channel::<String>(32);
+
 
     if is_server {
         // Launch the WebSocket server in a new thread or async runtime
