@@ -12,3 +12,5 @@ tokio = { version = "1", features = ["full"] }
 tokio-tungstenite = "0.21.0"
 tungstenite = "0.21.0"
 futures-util = "0.3"
+crossbeam = {}
+similar = "2.4.0" # Check for the latest version
